@@ -2,11 +2,11 @@
   type: bopti-image
   name_regex: (.*)\.png img_\1
 
-plague.png:
+kenney_future_narrow.png:
   type: font
-  name: font_plague
+  name: fong_plague
   charset: print
-  grid.size: 5x5
+  grid.size: 10x13
   grid.padding: 1
   proportional: True
 
