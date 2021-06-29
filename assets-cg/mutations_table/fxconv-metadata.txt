@@ -1,0 +1,3 @@
+*.txt:
+  custom-type: mutation-table
+  name_regex: (.*)\.txt mt_\1
