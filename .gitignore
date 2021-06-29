@@ -1,0 +1,5 @@
+build-fx/*
+build-cg/*
+
+assets-fx/__pycache__/*
+assets-cg/__pycache__/*
