@@ -1,0 +1,3 @@
+build-cg/*
+assets-cg/__pycache__/*
+*.g3a
