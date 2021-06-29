@@ -1,5 +1,6 @@
 *.png:
   type: bopti-image
+  profile:p4
   name_regex: (.*)\.png img_\1
 
 plague.png:

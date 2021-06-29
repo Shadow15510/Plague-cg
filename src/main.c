@@ -109,10 +109,8 @@ static void title_screen(void)
     extern bopti_image_t img_explosion;
 
     dclear(C_BLACK);
-    dupdate();
-    sleep_ms(250);
 
-    dsubimage(0, 0, &img_title, 0, 0, 128, 64, DIMAGE_NONE);
+    dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
     dprint_opt(32, 29, C_WHITE, C_BLACK, 0, 0, "VERSION %s", VERSION, -1);
     dupdate();
     sleep_ms(1000);
@@ -120,21 +118,22 @@ static void title_screen(void)
 
     for (int frame = 0; frame < 5; frame ++)
     {
-        dclear(C_BLACK);
-        dsubimage(0, 0, &img_title, 0, 0, 128, 64, DIMAGE_NONE);
+        dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
         dsubimage(76, 9, &img_explosion, 41 * frame, 0, 40, 40, DIMAGE_NONE);
         dupdate();
         sleep_ms(100);
     }
 
-    dclear(C_BLACK);
-    dsubimage(0, 0, &img_title, 0, 65, 128, 64, DIMAGE_NONE);
-    dupdate();
-    sleep_ms(750);
-
-    dclear(C_BLACK);
-    dsubimage(0, 0, &img_title, 0, 130, 128, 64, DIMAGE_NONE);
-    dupdate();
+    sleep_ms(200);
+    for (int times = 0; times < 5; times ++)
+    {
+        dsubimage(0, 0, &img_title, 0, DHEIGHT, DWIDTH, DHEIGHT, DIMAGE_NONE);
+        dupdate();
+        sleep_ms(200);
+        dsubimage(0, 0, &img_title, 0, DHEIGHT*2, DWIDTH, DHEIGHT, DIMAGE_NONE);
+        dupdate();
+        sleep_ms(200);
+    }
 
     getkey();
 }
