@@ -36,27 +36,6 @@ void display_foreground(const int background, const struct game *current_game, c
             // Disease propagation
             for (int i = 0; i < current_game->grid.width; i ++)
             {
-                for (int j = 0; j < current_game->grid.height; j ++)
-                {
-                    if ((current_game->grid.data[i + j * current_game->grid.width] == 1 || current_game->grid.data[i + j * current_game->grid.width] == 3) && world[j][i] != 0) dpixel(i, j, C_BLACK);
-                }
-            }
-
-            // Planes animations
-            for (int i = 0; current_game->planes[i]; i++)
-            {
-                dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
-            }
-
-            // Display if boost is activated
-            if (current_game->boost) dprint(0, 0, C_BLACK, "+");
-            break;
-
-        case 2:
-
-            // Disease propagation
-            for (int i = 0; i < current_game->grid.width; i ++)
-            {
                 for (int j = 0; j < 48; j ++)
                 {
                     if ((current_game->grid.data[i + j * current_game->grid.width] == 1 || current_game->grid.data[i + j * current_game->grid.width] == 3) && world[j][i] != 0) dpixel(i, j, C_BLACK);
@@ -72,12 +51,22 @@ void display_foreground(const int background, const struct game *current_game, c
             // Animated DNA
             dsubimage(1, 51, &img_dna, dna_animation * 8, 0, 7, 12, DIMAGE_NONE);
             
-            // Status bottom bar 
+            // Research bar 
             int length = 73 * current_game->research / current_game->limit;
             dprint(9, 58, C_BLACK, "%d", current_game->dna);
 
             dline(51, 60, 51 + length, 60, C_BLACK);
             dline(51, 59, 51 + length, 59, C_BLACK);
+
+            // Stats bar
+            /*
+            for (int i = 0; i < 4; i ++)
+            {
+                length = 63 * current_game->humans[i] / ((current_game->grid.width * current_game->grid.height) - BLANK_CASES);
+                dline(61, i*8 + 31, 61 + length, i*8 + 31, C_BLACK);
+                dline(61, i*8 + 32, 61 + length, i*8 + 32, C_BLACK);
+            }
+            */
 
             // Display if boost is activated
             if (current_game->boost) dprint(0, 0, C_BLACK, "+");
@@ -104,15 +93,6 @@ void display_foreground(const int background, const struct game *current_game, c
             if (current_game->mutations_selected[0]) dsubimage(7, 15, &img_mutations, 0, 16 * (current_game->mutations_selected[0] - 1), 15, 15, 0);
             if (current_game->mutations_selected[1]) dsubimage(37, 15, &img_mutations, 16, 16 * (current_game->mutations_selected[1] - 1), 15, 15, 0);
             if (current_game->mutations_selected[2]) dsubimage(67, 15, &img_mutations, 32, 16 * (current_game->mutations_selected[2] - 1), 15, 15, 0);
-            break;
-
-        case 6:
-            for (int i = 0; i < 4; i ++)
-            {
-                length = 63 * current_game->humans[i] / ((current_game->grid.width * current_game->grid.height) - BLANK_CASES);
-                dline(61, i*8 + 31, 61 + length, i*8 + 31, C_BLACK);
-                dline(61, i*8 + 32, 61 + length, i*8 + 32, C_BLACK);
-            }
             break;
     }
 }

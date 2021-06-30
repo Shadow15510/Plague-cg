@@ -96,16 +96,10 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
     int key = rtc_key();
 
     if (key == KEY_ARROW) *boost = (*boost + 1) % 2;
-    if (key == KEY_OPTN && (background == 1 || background == 2)) return (background % 2) + 1;
     if (key == KEY_VARS)
     {
         *mutation_menu = 4;
         return 3;
-    }
-    if (key == KEY_SQUARE)
-    {
-        if (background == 1 || background == 2) return 6;
-        else if (background == 6) return 1;
     }
 
     if (key == KEY_ALPHA)
@@ -113,7 +107,7 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
         if (background == 5) return 3;
         else return 1;
     }
-    if (key == KEY_EXIT && (background == 1 || background == 2)) return -1;
+    if (key == KEY_EXIT && background == 1) return -1;
 
     if (background == 3)
     {
