@@ -66,7 +66,7 @@ int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
         current_game->time = 0;
 
         // Display message on research
-        if (!current_game->research && current_game->priority) message("LA RECHERHCE CONTRE VOTRE VIRUS COMMENCE !"); 
+        if (!current_game->research && current_game->priority) message("LA RECHERCHE CONTRE VOTRE VIRUS COMMENCE !"); 
         else if (!*vaccine && (current_game->research == current_game->limit)) {*vaccine = 1; message("LE VACCIN EST TERMINE."); }
 
         // Update the game

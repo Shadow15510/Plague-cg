@@ -1,5 +1,3 @@
-build-fx/*
 build-cg/*
-
-assets-fx/__pycache__/*
 assets-cg/__pycache__/*
+*.g3a

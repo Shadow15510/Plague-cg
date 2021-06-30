@@ -1,13 +1,13 @@
 *.png:
   type: bopti-image
+  profile:p4
   name_regex: (.*)\.png img_\1
 
 plague.png:
   type: font
   name: font_plague
   charset: print
-  grid.size: 5x5
-  grid.padding: 1
-  proportional: True
+  grid.size: 13x16
+  grid.padding: 0
 
 
