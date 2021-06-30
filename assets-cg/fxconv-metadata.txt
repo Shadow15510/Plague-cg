@@ -6,8 +6,6 @@ kenney_future_narrow.png:
   type: font
   name: fong_plague
   charset: print
-  grid.size: 10x13
-  grid.padding: 1
-  proportional: True
+  grid.size: 13×16
 
 
