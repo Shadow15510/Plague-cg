@@ -7,8 +7,16 @@
 
 void display_background(const int background)
 {
+    /**
+     * 1 - map
+     * 2 - navigation menu
+     * 3 - info menu
+     * 4 - grid
+     * 5 - display message
+     * 6 - upgrade menu
+     **/
     extern const bopti_image_t img_bground;
-    dsubimage(0, 0, &img_bground, 0, 65 * (background - 1), 128, 64, DIMAGE_NONE);
+    dsubimage(0, 0, &img_bground, 0, 224 * (background - 1), 396, 224, DIMAGE_NONE);
 }
 
 
@@ -116,7 +124,7 @@ void display_mutation(const int table[4][8], const struct cursor c, const int mu
     extern bopti_image_t img_cursor;
 
     dclear(C_WHITE);
-    display_background(5);
+    display_background(4);
     for (int i = 0 ; i < 4 ; i++)
     {
         for (int j = 0 ; j < 8; j++)
@@ -140,7 +148,7 @@ void display_mutation_buy(const struct cursor c, const int mutation_menu, const 
 
     dclear(C_WHITE);
     
-    display_background(4);
+    display_background(3);
     dsubimage(3, 21, &img_mutations, 16 * (mutation_menu - 1), 16 * (id - 1), 15, 15, DIMAGE_NONE);
 
     dprint(47, 25, C_BLACK, mutation_data->name);
@@ -165,7 +173,7 @@ void display_mutation_description(const char *name, const char *description, con
 
     dclear(C_WHITE);
 
-    display_background(8);
+    display_background(6);
     dsubimage(3, 21, &img_mutations, 16 * (mutation_menu - 1), 16 * (id - 1), 15, 15, DIMAGE_NONE);
     dprint(47, 25, C_BLACK, name);
     
@@ -189,10 +197,10 @@ void display_message(char *msg)
     int decalage = 0;
 
     dclear(C_WHITE);
-    display_background(7);
+    display_background(5);
     for (int i = 0; i < 5; i ++)
     {
-        dtext_opt(54, 6 * i + 4, C_BLACK, C_WHITE, 0, 0, msg + decalage, 11);
+        dtext_opt(150, 6 * i + 4, C_BLACK, C_WHITE, 0, 0, msg + decalage, 11);
         
         int offset = 0;
         while (msg[decalage + offset] != '\0') offset += 1;

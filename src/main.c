@@ -1,7 +1,7 @@
 /*
   Project name ......: Plague
   Version ...........: 1.3.9
-  Last modification .: 8 June 2021
+  Last modification .: 30 June 2021
 
   code and assets provided with licence :
   GNU General Public Licence v3.0
@@ -39,11 +39,11 @@ int main(void)
     title_screen();
 
     // Game statistics
-    struct plane plane_1 = {22, 20, 2, 84, 20, 22, 20, 0};
-    struct plane plane_2 = {34, 20, 3, 34, 44, 34, 20, 0};
-    struct plane plane_3 = {68, 44, 1, 68, 20, 68, 44, 0};
-    struct plane plane_4 = {104, 20, 3, 104, 50, 104, 20, 0};
-    struct plane plane_5 = {68, 44, 4, 34, 44, 68, 44, 0};
+    struct plane plane_1 = {81, 49, 2, 308, 49, 81, 49, 0};
+    struct plane plane_2 = {115, 49, 3, 115, 119, 115, 49, 0};
+    struct plane plane_3 = {224, 119, 1, 224, 49, 224, 119, 0};
+    struct plane plane_4 = {224, 141, 2, 337, 141, 224, 141, 0};
+    struct plane plane_5 = {224, 119, 4, 115, 119, 224, 119, 0};
 
 
     struct game current_game =
@@ -67,7 +67,7 @@ int main(void)
 
         .planes = {&plane_1, &plane_2, &plane_3, &plane_4, &plane_5, NULL},
 
-        .grid = {64, 128, NULL},
+        .grid = {224, 396, NULL},
     };
 
     // Allocate memory
@@ -169,10 +169,10 @@ int main_loop(struct game *current_game)
 
         // Special actions : quit and manage mutations
         if (background == -1) end = 1;
-        if (background == 5)
+        if (background == 4)
         {
             mutation_select(current_game, mutation_menu);
-            background = 3;
+            background = 2;
         }
     }
 
