@@ -8,7 +8,7 @@
 void display_background(const int background)
 {
     extern const bopti_image_t img_bground;
-    dsubimage(0, 0, &img_bground, 0, 65 * (background - 1), 128, 64, DIMAGE_NONE);
+    dsubimage(0, 0, &img_bground, 0, 225 * (background - 1), 396, 224, DIMAGE_NONE);
 }
 
 
