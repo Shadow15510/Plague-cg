@@ -3,10 +3,11 @@
   profile:p4
   name_regex: (.*)\.png img_\1
 
-kenney_future_narrow.png:
+plague.png:
   type: font
-  name: fong_plague
+  name: font_plague
   charset: print
-  grid.size: 13×16
+  grid.size: 13x16
+  grid.padding: 0
 
 
