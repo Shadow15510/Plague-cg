@@ -4,7 +4,7 @@
 #include "core.h"
 
 // humans per case of the epidemic grid
-#define HUMANS_PER_CASE 1000000
+#define HUMANS_PER_CASE 140000
 
 // can_become_infected : return 0 if the case (i, j) isn't infectable, 1 else
 bool can_become_infected(const struct grid epidemic_grid, const int mutations_selected[3], const int i, const int j);

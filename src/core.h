@@ -15,7 +15,7 @@
 #define NB_PLANES 5
 
 // Number of non-infectable cases
-#define BLANK_CASES 5382
+#define BLANK_CASES 47204
 
 struct grid
 {    
