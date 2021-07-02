@@ -1,7 +1,7 @@
 /*
-  Project name ......: Plague
+  Project name ......: Plague CG
   Version ...........: 1.3.9
-  Last modification .: 30 June 2021
+  Last modification .: 2 July 2021
 
   code and assets provided with licence :
   GNU General Public Licence v3.0
@@ -111,7 +111,7 @@ static void title_screen(void)
     dclear(C_BLACK);
 
     dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-    dprint_opt(32, 120, C_BLACK, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
+    dprint_opt(32, 120, C_WHITE, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
     dupdate();
     sleep_ms(1000);
     
