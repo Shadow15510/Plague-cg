@@ -18,6 +18,7 @@ void display_background(const int background)
 
     extern const bopti_image_t img_map;
     extern const bopti_image_t img_message;
+    extern const bopti_image_t img_grid;
 
     switch(background) {
         case 1:
@@ -28,6 +29,7 @@ void display_background(const int background)
         case 3:
             break;
         case 4:
+            dimage(0, 0, &img_grid);
             break;
         case 5:
             dimage(0, 0, &img_message);
@@ -108,9 +110,9 @@ void display_foreground(const int background, const struct game *current_game, c
             dline(57, 60, 57 + length, 60, C_BLACK);
             dline(57, 61, 57 + length, 61, C_BLACK);
 
-            if (current_game->mutations_selected[0]) dsubimage(7, 15, &img_mutations, 0, 16 * (current_game->mutations_selected[0] - 1), 15, 15, 0);
-            if (current_game->mutations_selected[1]) dsubimage(37, 15, &img_mutations, 16, 16 * (current_game->mutations_selected[1] - 1), 15, 15, 0);
-            if (current_game->mutations_selected[2]) dsubimage(67, 15, &img_mutations, 32, 16 * (current_game->mutations_selected[2] - 1), 15, 15, 0);
+            if (current_game->mutations_selected[0]) dsubimage(7, 15, &img_mutations, 0, 44 * (current_game->mutations_selected[0] - 1), 44, 44, 0);
+            if (current_game->mutations_selected[1]) dsubimage(37, 15, &img_mutations, 44, 44 * (current_game->mutations_selected[1] - 1), 44, 44, 0);
+            if (current_game->mutations_selected[2]) dsubimage(67, 15, &img_mutations, 88, 44 * (current_game->mutations_selected[2] - 1), 44, 44, 0);
             break;
     }
 }
@@ -123,14 +125,15 @@ void display_mutation(const int table[4][8], const struct cursor c, const int mu
 
     dclear(C_WHITE);
     display_background(4);
+    dprint(106,14,C_WHITE,"test menu");
     for (int i = 0 ; i < 4 ; i++)
     {
         for (int j = 0 ; j < 8; j++)
         {
-            if (table[i][j]) dsubimage(j*16, i*16, &img_mutations, 16 * (mutation_menu - 1), 16 * (table[i][j] - 1), 15, 15, DIMAGE_NONE);
+            if (table[i][j]) dsubimage(j*44+22, i*44+46, &img_mutations, 44 * (mutation_menu - 1), 44 * (table[i][j] - 1), 44, 44, DIMAGE_NONE);
         }
     }
-    dsubimage((16 * c.x) - 1, (16 * c.y) - 1, &img_cursor, 0, 17 * (c.display), 17, 17, DIMAGE_NONE);
+    dsubimage((44 * c.x)+22, (44 * c.y)+46, &img_cursor, 0, 44 * (c.display), 44, 44, DIMAGE_NONE);
     dupdate();
 
 }
@@ -147,7 +150,7 @@ void display_mutation_buy(const struct cursor c, const int mutation_menu, const 
     dclear(C_WHITE);
     
     display_background(3);
-    dsubimage(3, 21, &img_mutations, 16 * (mutation_menu - 1), 16 * (id - 1), 15, 15, DIMAGE_NONE);
+    dsubimage(3, 21, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
 
     dprint(47, 25, C_BLACK, mutation_data->name);
     if (!current_game->mutations_bought[mutation_menu - 1][id - 1]) dprint(81, 33, C_BLACK, "%d", mutation_data->dna);
@@ -172,7 +175,7 @@ void display_mutation_description(const char *name, const char *description, con
     dclear(C_WHITE);
 
     display_background(6);
-    dsubimage(3, 21, &img_mutations, 16 * (mutation_menu - 1), 16 * (id - 1), 15, 15, DIMAGE_NONE);
+    dsubimage(3, 21, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
     dprint(47, 25, C_BLACK, name);
     
     for (int i = 0; i < 4; i ++)

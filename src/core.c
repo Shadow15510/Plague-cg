@@ -99,17 +99,17 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
     if (key == KEY_VARS)
     {
         *mutation_menu = 4;
-        return 3;
+        return 2;
     }
 
     if (key == KEY_ALPHA)
     {
-        if (background == 5) return 3;
+        if (background == 4) return 2;
         else return 1;
     }
     if (key == KEY_EXIT && background == 1) return -1;
 
-    if (background == 3)
+    if (background == 2)
     {
         switch (key)
         {
@@ -128,7 +128,7 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
             // Validation
             case KEY_SHIFT:
                 if (*mutation_menu == 4) return 1;
-                else return 5;
+                else return 4;
                 break;
         }
     }
