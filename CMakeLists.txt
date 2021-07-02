@@ -26,7 +26,8 @@ set(ASSETS
 set(ASSETS_cg
   assets-cg/plague.png
   assets-cg/planes.png
-  assets-cg/bground.png
+  assets-cg/map.png
+  assets-cg/message.png
   assets-cg/mutations.png
   assets-cg/cursor.png
   assets-cg/title.png

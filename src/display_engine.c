@@ -15,8 +15,26 @@ void display_background(const int background)
      * 5 - display message
      * 6 - upgrade menu
      **/
-    extern const bopti_image_t img_bground;
-    dsubimage(0, 0, &img_bground, 0, 224 * (background - 1), 396, 224, DIMAGE_NONE);
+
+    extern const bopti_image_t img_map;
+    extern const bopti_image_t img_message;
+
+    switch(background) {
+        case 1:
+            dimage(0, 0, &img_map);
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            dimage(0, 0, &img_message);
+            break;
+        case 6:
+            break;
+    }
 }
 
 
@@ -45,7 +63,7 @@ void display_foreground(const int background, const struct game *current_game, c
             // Planes animations
             for (int i = 0; current_game->planes[i]; i++)
             {
-                if (current_game->planes[i]->y + 8 < 57) dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
+                if (current_game->planes[i]->y + 8 < 216) dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
             }
 
             // Animated DNA
@@ -53,7 +71,7 @@ void display_foreground(const int background, const struct game *current_game, c
             
             // Research bar 
             int length = 73 * current_game->research / current_game->limit;
-            dprint(9, 58, C_BLACK, "%d", current_game->dna);
+            dprint(30, 200, C_WHITE, "%d", current_game->dna);
 
             dline(51, 60, 51 + length, 60, C_BLACK);
             dline(51, 59, 51 + length, 59, C_BLACK);
