@@ -67,7 +67,7 @@ int main(void)
 
         .planes = {&plane_1, &plane_2, &plane_3, &plane_4, &plane_5, NULL},
 
-        .grid = {224, 396, NULL},
+        .grid = {184, 396, NULL},
     };
 
     // Allocate memory
@@ -111,7 +111,7 @@ static void title_screen(void)
     dclear(C_BLACK);
 
     dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-    dprint_opt(32, 120, C_BLACK, C_WHITE, 0, 0, "VERSION %s", VERSION, -1);
+    dprint_opt(32, 120, C_BLACK, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
     dupdate();
     sleep_ms(1000);
     
@@ -125,7 +125,7 @@ static void title_screen(void)
     }
 
     sleep_ms(120);
-    for (int times = 0; times < 5; times ++)
+    for (int times = 0; times < 3; times ++)
     {
         dsubimage(0, 0, &img_title, 0, DHEIGHT, DWIDTH, DHEIGHT, DIMAGE_NONE);
         dupdate();

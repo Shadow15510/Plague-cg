@@ -13,7 +13,7 @@ int grid_get(const struct grid epidemic_grid, const int i, const int j)
 
 bool can_become_infected(const struct grid epidemic_grid, const int mutations_selected[3], const int i, const int j)
 {
-    extern const uint8_t world[64][128];
+    extern const uint8_t world[184][396];
 
     // In case of water, low or high temperature
     if (world[j][i] == 0 && mutations_selected[2] != 3 && mutations_selected[2] != 4 && mutations_selected[2] != 6) return false;
@@ -33,7 +33,7 @@ bool bernoulli(const int p)
 
 void epidemic_simulation(struct game *current_game)
 {
-    extern const uint8_t world[64][128];
+    extern const uint8_t world[184][396];
 
     srand(current_game->total_time);
 

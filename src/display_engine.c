@@ -43,7 +43,7 @@ void display_foreground(const int background, const struct game *current_game, c
     extern const bopti_image_t img_mutations;
     extern const bopti_image_t img_planes;
     extern const bopti_image_t img_dna;
-    extern const uint8_t world[64][128];
+    extern const uint8_t world[184][396];
 
     GUNUSED int length;
 
@@ -63,7 +63,7 @@ void display_foreground(const int background, const struct game *current_game, c
             // Planes animations
             for (int i = 0; current_game->planes[i]; i++)
             {
-                if (current_game->planes[i]->y + 8 < 216) dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
+                if (current_game->planes[i]->y + 8 < 184) dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
             }
 
             // Animated DNA
