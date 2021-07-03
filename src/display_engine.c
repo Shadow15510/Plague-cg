@@ -40,11 +40,10 @@ void display_background(const int background)
 }
 
 
-void display_foreground(const int background, const struct game *current_game, const int mutation_menu, const int dna_animation)
+void display_foreground(const int background, const struct game *current_game, const int mutation_menu)
 {
     extern const bopti_image_t img_mutations;
     extern const bopti_image_t img_planes;
-    extern const bopti_image_t img_dna;
     extern const uint8_t world[184][396];
 
     GUNUSED int length;
@@ -68,9 +67,6 @@ void display_foreground(const int background, const struct game *current_game, c
                 if (current_game->planes[i]->y + 8 < 184) dsubimage(current_game->planes[i]->x - 4, current_game->planes[i]->y - 4, &img_planes, 0, 8 * (current_game->planes[i]->direction - 1), 8, 8, DIMAGE_NONE);
             }
 
-            // Animated DNA
-            dsubimage(1, 51, &img_dna, dna_animation * 8, 0, 7, 12, DIMAGE_NONE);
-            
             // Research bar 
             int length = 73 * current_game->research / current_game->limit;
             dprint(30, 200, C_WHITE, "%d", current_game->dna);
@@ -89,7 +85,7 @@ void display_foreground(const int background, const struct game *current_game, c
             */
 
             // Display if boost is activated
-            if (current_game->boost) dprint(0, 0, C_BLACK, "+");
+            if (current_game->boost) dprint(0, 0, C_WHITE, "+");
 
             break;
 

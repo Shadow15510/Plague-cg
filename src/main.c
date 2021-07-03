@@ -86,7 +86,7 @@ int main(void)
         // Display stats at the end of the game
         dclear(C_WHITE);
         display_background(6);
-        display_foreground(6, &current_game, 0, 0);
+        display_foreground(6, &current_game, 0);
         dupdate();
         sleep_ms(250);
 
@@ -106,35 +106,13 @@ int main(void)
 static void title_screen(void)
 {
     extern bopti_image_t img_title;
-    extern bopti_image_t img_explosion;
 
     dclear(C_BLACK);
 
-    dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-    dprint_opt(32, 120, C_WHITE, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
+    dimage(0, 0, &img_title);
+    dprint_opt(5, 200, C_WHITE, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
     dupdate();
-    sleep_ms(1000);
     
-
-    for (int frame = 0; frame < 5; frame ++)
-    {
-        dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dsubimage(225, 70, &img_explosion, 123 * frame, 0, 120, 120, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(80);
-    }
-
-    sleep_ms(120);
-    for (int times = 0; times < 3; times ++)
-    {
-        dsubimage(0, 0, &img_title, 0, DHEIGHT, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(200);
-        dsubimage(0, 0, &img_title, 0, DHEIGHT*2, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(200);
-    }
-
     getkey();
 }
 
@@ -142,7 +120,7 @@ static void title_screen(void)
 int main_loop(struct game *current_game)
 {
     int background = 1, mutation_menu = 4;
-    int end = 0, to_save = 1, dna_animation = 0, vaccine = 0;
+    int end = 0, to_save = 1, vaccine = 0;
 
     static volatile int tick = 1;
     int t = timer_configure(TIMER_ANY, ENGINE_TICK*1000, GINT_CALL(callback_tick, &tick));
@@ -157,11 +135,11 @@ int main_loop(struct game *current_game)
         // Update the screen
         dclear(C_WHITE);
         display_background(background);
-        display_foreground(background, current_game, mutation_menu, dna_animation);
+        display_foreground(background, current_game, mutation_menu);
         dupdate();
 
         // Compute the motion of planes, DNA points and infectious model
-        to_save = next_frame(current_game, &dna_animation, &vaccine);
+        to_save = next_frame(current_game, &vaccine);
         if (!to_save) return 0;
         
         // Get inputs from the keyboard and manage it

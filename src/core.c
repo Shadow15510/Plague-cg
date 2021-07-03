@@ -9,7 +9,7 @@
 #include "display_engine.h"
 
 
-int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
+int next_frame(struct game *current_game, int *vaccine)
 {
     for (int i = 0; current_game->planes[i]; i++)
     {
@@ -57,8 +57,6 @@ int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
 
     current_game->time += ENGINE_TICK;
     current_game->total_time += ENGINE_TICK;
-
-    if (!(current_game->time % 150)) *dna_animation = (*dna_animation + 1) % 16;
 
     if (current_game->time > limit_tick)
     {
