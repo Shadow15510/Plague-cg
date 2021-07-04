@@ -5,9 +5,6 @@ def convert(input_name, output, params, target):
     if params["custom-type"] == "mutation-table":
         convert_mt(input_name, output, params, target)
         return 0
-    elif params["custom-type"] == "mutation":
-        convert_md(input_name, output, params, target)
-        return 0
     else:
         return 1
 
