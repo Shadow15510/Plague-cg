@@ -6,24 +6,18 @@
 
 void display_background(const int background)
 {
-    /**
-     * 1 - map
-     * 2 - navigation menu
-     * 3 - info menu
-     * 4 - grid
-     * 5 - display message
-     **/
-
     extern const bopti_image_t img_map;
-    extern const bopti_image_t img_message;
+    extern const bopti_image_t img_selectedmenu;
     extern const bopti_image_t img_infos;
     extern const bopti_image_t img_grid;
+    extern const bopti_image_t img_message;
 
     switch(background) {
         case 1:
             dimage(0, 0, &img_map);
             break;
         case 2:
+            dimage(0, 0, &img_selectedmenu);
             break;
         case 3:
             dimage(0, 0, &img_infos);
@@ -88,25 +82,22 @@ void display_foreground(const int background, const struct game *current_game, c
             break;
 
         case 2:
-            drect(mutation_menu + 31 * (mutation_menu - 1), 0, mutation_menu + 31 * (mutation_menu) - 1, 7, C_INVERT);
+            drect(15 + 98 * (mutation_menu - 1), 29, 82 + 98 * (mutation_menu - 1), 30, C_WHITE);
 
-            dprint(102, 37, C_BLACK, "%d", current_game->dna);
+            dprint(155, 123, C_BLACK, "ADN : %d", current_game->dna);
             
             length = 67 * current_game->contagion / 100;
-            dline(57, 48, 57 + length, 48, C_BLACK);
-            dline(57, 49, 57 + length, 49, C_BLACK);
+            drect(122, 160, 122+length, 165, C_RGB(255, 0, 255));
             
             length = 67 * current_game->severity / 100;
-            dline(57, 54, 57 + length, 54, C_BLACK);
-            dline(57, 55, 57 + length, 55, C_BLACK);
+            drect(122, 180, 122+length, 185, C_RGB(255, 255, 0));
             
             length = 67 * current_game->lethality / 100;
-            dline(57, 60, 57 + length, 60, C_BLACK);
-            dline(57, 61, 57 + length, 61, C_BLACK);
+            drect(122, 200, 122+length, 205, C_RGB(114, 0, 136));
 
-            if (current_game->mutations_selected[0]) dsubimage(7, 15, &img_mutations, 0, 44 * (current_game->mutations_selected[0] - 1), 44, 44, 0);
-            if (current_game->mutations_selected[1]) dsubimage(37, 15, &img_mutations, 44, 44 * (current_game->mutations_selected[1] - 1), 44, 44, 0);
-            if (current_game->mutations_selected[2]) dsubimage(67, 15, &img_mutations, 88, 44 * (current_game->mutations_selected[2] - 1), 44, 44, 0);
+            if (current_game->mutations_selected[0]) dsubimage(78, 67, &img_mutations, 0, 44 * (current_game->mutations_selected[0] - 1), 44, 44, 0);
+            if (current_game->mutations_selected[1]) dsubimage(176, 67, &img_mutations, 44, 44 * (current_game->mutations_selected[1] - 1), 44, 44, 0);
+            if (current_game->mutations_selected[2]) dsubimage(273, 67, &img_mutations, 88, 44 * (current_game->mutations_selected[2] - 1), 44, 44, 0);
             break;
     }
 }
@@ -127,7 +118,7 @@ void display_mutation(const int table[4][8], const struct cursor c, const int mu
             dprint(138,14,C_WHITE, "CAPACITES");
             break;
         case 3:
-            dprint(117,14,C_WHITE, "TRANSMISSION");
+            dprint(130,14,C_WHITE, "DIFFUSIONS");
             break;
     }
     

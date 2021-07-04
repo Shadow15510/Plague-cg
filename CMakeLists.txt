@@ -30,6 +30,7 @@ set(ASSETS_cg
   assets-cg/message.png
   assets-cg/grid.png
   assets-cg/infos.png
+  assets-cg/selectedmenu.png
   assets-cg/mutations.png
   assets-cg/cursor.png
   assets-cg/title.png
