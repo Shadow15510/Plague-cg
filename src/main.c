@@ -32,7 +32,6 @@ int main_loop(struct game *current_game);
 
 int main(void)
 {
-
     extern font_t font_plague;
     dfont(&font_plague);
 

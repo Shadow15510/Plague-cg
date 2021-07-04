@@ -4,7 +4,6 @@
 #include "mutation_engine.h"
 #include "display_engine.h"
 
-
 void display_background(const int background)
 {
     /**
@@ -13,11 +12,11 @@ void display_background(const int background)
      * 3 - info menu
      * 4 - grid
      * 5 - display message
-     * 6 - upgrade menu
      **/
 
     extern const bopti_image_t img_map;
     extern const bopti_image_t img_message;
+    extern const bopti_image_t img_infos;
     extern const bopti_image_t img_grid;
 
     switch(background) {
@@ -27,14 +26,13 @@ void display_background(const int background)
         case 2:
             break;
         case 3:
+            dimage(0, 0, &img_infos);
             break;
         case 4:
             dimage(0, 0, &img_grid);
             break;
         case 5:
             dimage(0, 0, &img_message);
-            break;
-        case 6:
             break;
     }
 }
@@ -89,7 +87,7 @@ void display_foreground(const int background, const struct game *current_game, c
 
             break;
 
-        case 3:
+        case 2:
             drect(mutation_menu + 31 * (mutation_menu - 1), 0, mutation_menu + 31 * (mutation_menu) - 1, 7, C_INVERT);
 
             dprint(102, 37, C_BLACK, "%d", current_game->dna);
@@ -121,7 +119,18 @@ void display_mutation(const int table[4][8], const struct cursor c, const int mu
 
     dclear(C_WHITE);
     display_background(4);
-    dprint(106,14,C_WHITE,"test menu");
+    switch(mutation_menu) {
+        case 1:
+            dprint(138,14,C_WHITE, "SYMPTOMES");
+            break;
+        case 2:
+            dprint(138,14,C_WHITE, "CAPACITES");
+            break;
+        case 3:
+            dprint(117,14,C_WHITE, "TRANSMISSION");
+            break;
+    }
+    
     for (int i = 0 ; i < 4 ; i++)
     {
         for (int j = 0 ; j < 8; j++)
@@ -146,17 +155,23 @@ void display_mutation_buy(const struct cursor c, const int mutation_menu, const 
     dclear(C_WHITE);
     
     display_background(3);
-    dsubimage(3, 21, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
+    dsubimage(28, 91, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
 
-    dprint(47, 25, C_BLACK, mutation_data->name);
-    if (!current_game->mutations_bought[mutation_menu - 1][id - 1]) dprint(81, 33, C_BLACK, "%d", mutation_data->dna);
-    else dprint(81, 33, C_BLACK, "ACHETEE");
-    dprint(81, 41, C_BLACK, "%d (%d)", mutation_data->contagion, mutation_data->contagion - mutation_sel->contagion);
-    dprint(81, 49, C_BLACK, "%d (%d)", mutation_data->severity, mutation_data->severity - mutation_sel->severity);
-    dprint(81, 57, C_BLACK, "%d (%d)", mutation_data->lethality, mutation_data->lethality - mutation_sel->lethality);
+    dprint(105, 85, C_BLACK, "NOM : %s", mutation_data->name);
+    if (!current_game->mutations_bought[mutation_menu - 1][id - 1]) dprint(150, 180, C_RGB(123, 8, 8), "COUT ADN : %d", mutation_data->dna);
+    else dprint(195, 180, C_RGB(123, 8, 8), "ACHETEE");
+    dprint(105, 105, C_BLACK, "CONTAGION : %d (%d)", mutation_data->contagion, mutation_data->contagion - mutation_sel->contagion);
+    dprint(105, 125, C_BLACK, "SEVERITE  : %d (%d)", mutation_data->severity, mutation_data->severity - mutation_sel->severity);
+    dprint(105, 145, C_BLACK, "LETALITE  : %d (%d)", mutation_data->lethality, mutation_data->lethality - mutation_sel->lethality);
 
-    if (button_selected) drect(81, 2, 123, 8, C_INVERT);
-    else drect(81, 12, 123, 18, C_INVERT);
+    if (button_selected) {
+        drect(294, 8, 298, 26, C_WHITE);
+        drect(294, 30, 391, 26, C_WHITE);
+    }
+    else {
+        drect(294, 36, 298, 51, C_WHITE);
+        drect(294, 55, 391, 51, C_WHITE);
+    }
 
     dupdate();
 }
@@ -170,7 +185,7 @@ void display_mutation_description(const char *name, const char *description, con
 
     dclear(C_WHITE);
 
-    display_background(6);
+    display_background(3);
     dsubimage(3, 21, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
     dprint(47, 25, C_BLACK, name);
     
@@ -197,13 +212,13 @@ void display_message(char *msg)
     display_background(5);
     for (int i = 0; i < 5; i ++)
     {
-        dtext_opt(150, 6 * i + 4, C_BLACK, C_WHITE, 0, 0, msg + decalage, 11);
+        dtext_opt(190, 20 * i + 30, C_BLACK, C_WHITE, 0, 0, msg + decalage, 13);
         
         int offset = 0;
         while (msg[decalage + offset] != '\0') offset += 1;
 
         if (!offset) break;
-        else if (offset > 11) decalage += 11;
+        else if (offset > 13) decalage += 13;
         else decalage += offset;
     }
     dupdate();
