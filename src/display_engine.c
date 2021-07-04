@@ -186,18 +186,18 @@ void display_mutation_description(const char *name, const char *description, con
     dclear(C_WHITE);
 
     display_background(3);
-    dsubimage(3, 21, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
-    dprint(47, 25, C_BLACK, name);
+    dsubimage(28, 91, &img_mutations, 44 * (mutation_menu - 1), 44 * (id - 1), 44, 44, DIMAGE_NONE);
+    dprint(105, 85, C_BLACK, "NOM : %s", name);
     
     for (int i = 0; i < 4; i ++)
     {
-        dtext_opt(25, 33 + i * 7, C_BLACK, C_WHITE, 0 ,0, description + decalage, 16);
+        dtext_opt(105, 115 + i * 20, C_BLACK, C_WHITE, 0 ,0, description + decalage, 19);
         
         int offset = 0;
         while (description[decalage + offset] != '\0') offset += 1;
 
         if (!offset) break;
-        else if (offset > 16) decalage += 16;
+        else if (offset > 19) decalage += 19;
         else decalage += offset;
     }
     dupdate();
