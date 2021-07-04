@@ -82,18 +82,18 @@ void display_foreground(const int background, const struct game *current_game, c
             break;
 
         case 2:
-            drect(15 + 98 * (mutation_menu - 1), 29, 82 + 98 * (mutation_menu - 1), 30, C_WHITE);
+            drect(15 + 99 * (mutation_menu - 1), 29, 82 + 99 * (mutation_menu - 1), 30, C_WHITE);
 
             dprint(155, 123, C_BLACK, "ADN : %d", current_game->dna);
             
-            length = 67 * current_game->contagion / 100;
-            drect(122, 160, 122+length, 165, C_RGB(255, 0, 255));
+            length = 247 * current_game->contagion / 100;
+            drect(122, 160, 122+length, 165, C_RGB(252, 0, 252));
             
-            length = 67 * current_game->severity / 100;
-            drect(122, 180, 122+length, 185, C_RGB(255, 255, 0));
+            length = 247 * current_game->severity / 100;
+            drect(122, 180, 122+length, 185, C_RGB(246, 246, 0));
             
-            length = 67 * current_game->lethality / 100;
-            drect(122, 200, 122+length, 205, C_RGB(114, 0, 136));
+            length = 247 * current_game->lethality / 100;
+            drect(122, 200, 122+length, 205, C_RGB(140, 0, 160));
 
             if (current_game->mutations_selected[0]) dsubimage(78, 67, &img_mutations, 0, 44 * (current_game->mutations_selected[0] - 1), 44, 44, 0);
             if (current_game->mutations_selected[1]) dsubimage(176, 67, &img_mutations, 44, 44 * (current_game->mutations_selected[1] - 1), 44, 44, 0);
