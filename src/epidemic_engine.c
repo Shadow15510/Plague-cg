@@ -1,6 +1,9 @@
 #include <gint/std/stdlib.h>
 #include <math.h>
 
+#include <gint/display.h>
+#include <gint/keyboard.h>
+
 #include "epidemic_engine.h"
 
 
@@ -53,10 +56,9 @@ void epidemic_simulation(struct game *current_game)
             {
                 // Healthy
                 case 0:
-
                     // Become infected
                     if (can_become_infected(current_game->grid, current_game->mutations_selected, i, j) && bernoulli(current_game->contagion))
-                    {
+                    {                       
                         current_grid[i + j * current_game->grid.width] = 1;
                         if (world[j][i])
                         {

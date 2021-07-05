@@ -71,6 +71,7 @@ int main(void)
 
     // Allocate memory
     current_game.grid.data = calloc(current_game.grid.width * current_game.grid.height, sizeof(uint8_t));
+    for (int i = 0; i < current_game.grid.width * current_game.grid.height; i ++) current_game.grid.data[i] = 0;
 
     current_game.grid.data[290 + 50 * current_game.grid.width] = 1;
     current_game.humans[0] = (current_game.grid.width * current_game.grid.height) - 1 - BLANK_CASES;
