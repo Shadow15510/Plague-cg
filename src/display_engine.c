@@ -1,4 +1,5 @@
 #include <gint/display.h>
+#include <gint/display-cg.h>
 #include <math.h>
 
 #include "mutation_engine.h"
@@ -38,18 +39,21 @@ void display_foreground(const int background, const struct game *current_game, c
     extern const bopti_image_t img_planes;
     extern const uint8_t world[184][396];
 
+
+    extern const 
     GUNUSED int length;
 
     switch (background)
     {
         case 1:
-
             // Disease propagation
             for (int i = 0; i < current_game->grid.width; i ++)
             {
-                for (int j = 0; j < 48; j ++)
+                for (int j = 0; j < current_game->grid.height; j ++)
                 {
-                    if ((current_game->grid.data[i + j * current_game->grid.width] == 1 || current_game->grid.data[i + j * current_game->grid.width] == 3) && world[j][i] != 0) dpixel(i, j, C_BLACK);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 1) dpixel(i, j, C_RED);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 3 && world[j][i] != 0) dpixel(i, j, C_BLACK);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 2) dpixel(i, j, C_GREEN);
                 }
             }
 
@@ -60,21 +64,40 @@ void display_foreground(const int background, const struct game *current_game, c
             }
 
             // Research bar 
-            int length = 73 * current_game->research / current_game->limit;
+            int length = 77 * current_game->research / current_game->limit;
             dprint(30, 200, C_WHITE, "%d", current_game->dna);
 
-            dline(51, 60, 51 + length, 60, C_BLACK);
-            dline(51, 59, 51 + length, 59, C_BLACK);
+            dline(86, 200, 86 + length, 200, C_BLACK);
+            dline(86, 201, 86 + length, 201, C_BLACK);
+            dline(86, 202, 86 + length, 202, C_BLACK);
+            dline(86, 203, 86 + length, 203, C_BLACK);
 
             // Stats bar
-            /*
             for (int i = 0; i < 4; i ++)
             {
-                length = 63 * current_game->humans[i] / ((current_game->grid.width * current_game->grid.height) - BLANK_CASES);
-                dline(61, i*8 + 31, 61 + length, i*8 + 31, C_BLACK);
-                dline(61, i*8 + 32, 61 + length, i*8 + 32, C_BLACK);
+                int color = C_BLACK;
+                switch (i)
+                {
+                    case 0:
+                        color = C_GREEN;
+                        break;
+                    case 1:
+                        color = C_RED;
+                        break;
+                    case 2:
+                        color = C_GREEN;
+                        break;
+                    case 3:
+                        color = C_BLACK;
+                        break;
+                }
+
+                length = 166 * current_game->humans[i] / ((current_game->grid.width * current_game->grid.height) - BLANK_CASES);
+                dline(224, i*6 + 200, 224 + length, i*6 + 200, color);
+                dline(224, i*6 + 201, 224 + length, i*6 + 201, color);
+                dline(224, i*6 + 202, 224 + length, i*6 + 202, color);
+                dline(224, i*6 + 203, 224 + length, i*6 + 203, color);
             }
-            */
 
             // Display if boost is activated
             if (current_game->boost) dprint(0, 0, C_WHITE, "+");

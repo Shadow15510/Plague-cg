@@ -1,7 +1,7 @@
 /*
   Project name ......: Plague CG
   Version ...........: 1.3.9
-  Last modification .: 2 July 2021
+  Last modification .: 5 July 2021
 
   code and assets provided with licence :
   GNU General Public Licence v3.0
@@ -72,7 +72,7 @@ int main(void)
     // Allocate memory
     current_game.grid.data = calloc(current_game.grid.width * current_game.grid.height, sizeof(uint8_t));
 
-    current_game.grid.data[95 + 20 * current_game.grid.width] = 1;
+    current_game.grid.data[290 + 50 * current_game.grid.width] = 1;
     current_game.humans[0] = (current_game.grid.width * current_game.grid.height) - 1 - BLANK_CASES;
 
     gint_world_switch(GINT_CALL(read_save, (void *)&current_game));
