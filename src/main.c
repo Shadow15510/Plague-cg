@@ -84,12 +84,6 @@ int main(void)
     else
     {
         // Display stats at the end of the game
-        dclear(C_WHITE);
-        display_background(6);
-        display_foreground(6, &current_game, 0);
-        dupdate();
-        sleep_ms(250);
-
         int opt = GETKEY_DEFAULT & ~GETKEY_MOD_SHIFT & ~GETKEY_MOD_ALPHA & ~GETKEY_REP_ARROWS;
         getkey_opt(opt, NULL);
 
