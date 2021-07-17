@@ -53,7 +53,7 @@ void display_foreground(const int background, const struct game *current_game, c
                 {
                     if (current_game->grid.data[i + j * current_game->grid.width] == 1 && world[j][i] != 0) dpixel(i, j, C_RED);
                     if (current_game->grid.data[i + j * current_game->grid.width] == 3 && world[j][i] != 0) dpixel(i, j, C_BLACK);
-                    if (current_game->grid.data[i + j * current_game->grid.width] == 2 && world[j][i] != 0) dpixel(i, j, C_GREEN);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 2 && world[j][i] != 0) dpixel(i, j, C_RGB(0,255,255));
                 }
             }
 
@@ -67,10 +67,7 @@ void display_foreground(const int background, const struct game *current_game, c
             int length = 77 * current_game->research / current_game->limit;
             dprint(30, 200, C_WHITE, "%d", current_game->dna);
 
-            dline(86, 200, 86 + length, 200, C_BLACK);
-            dline(86, 201, 86 + length, 201, C_BLACK);
-            dline(86, 202, 86 + length, 202, C_BLACK);
-            dline(86, 203, 86 + length, 203, C_BLACK);
+            drect(86, 200, 86 + length, 203, C_RGB(0,255,255));
 
             // Stats bar
             for (int i = 0; i < 4; i ++)
@@ -85,7 +82,7 @@ void display_foreground(const int background, const struct game *current_game, c
                         color = C_RED;
                         break;
                     case 2:
-                        color = C_GREEN;
+                        color = C_RGB(0,255,255);
                         break;
                     case 3:
                         color = C_BLACK;
