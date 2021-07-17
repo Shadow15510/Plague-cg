@@ -51,9 +51,9 @@ void display_foreground(const int background, const struct game *current_game, c
             {
                 for (int j = 0; j < current_game->grid.height; j ++)
                 {
-                    if (current_game->grid.data[i + j * current_game->grid.width] == 1) dpixel(i, j, C_RED);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 1 && world[j][i] != 0) dpixel(i, j, C_RED);
                     if (current_game->grid.data[i + j * current_game->grid.width] == 3 && world[j][i] != 0) dpixel(i, j, C_BLACK);
-                    if (current_game->grid.data[i + j * current_game->grid.width] == 2) dpixel(i, j, C_GREEN);
+                    if (current_game->grid.data[i + j * current_game->grid.width] == 2 && world[j][i] != 0) dpixel(i, j, C_GREEN);
                 }
             }
 
