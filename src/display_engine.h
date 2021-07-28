@@ -7,7 +7,7 @@
 void display_background(const int background);
 
 // display_foreground : display the foreground, planes, statistics
-void display_foreground(const int background, const struct game *current_game, const int mutation_menu, const int dna_animation);
+void display_foreground(const int background, const struct game *current_game, const int mutation_menu);
 
 // display_mutation : display the mutation selection screen
 void display_mutation(const int table[4][8], const struct cursor c, const int mutation_menu);

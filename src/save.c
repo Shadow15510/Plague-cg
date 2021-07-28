@@ -37,7 +37,7 @@ void read_save(struct game *current_game)
         BFile_Create(filename, BFile_File, &size);
     }
 
-    // Loading game data
+    // else loading game data
     else 
     {
         fd = BFile_Open(filename, BFile_ReadOnly);

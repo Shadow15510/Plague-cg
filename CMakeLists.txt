@@ -26,12 +26,14 @@ set(ASSETS
 set(ASSETS_cg
   assets-cg/plague.png
   assets-cg/planes.png
-  assets-cg/bground.png
+  assets-cg/map.png
+  assets-cg/message.png
+  assets-cg/grid.png
+  assets-cg/infos.png
+  assets-cg/selectedmenu.png
   assets-cg/mutations.png
   assets-cg/cursor.png
   assets-cg/title.png
-  assets-cg/dna.png
-  assets-cg/explosion.png
   assets-cg/mutations_table/abilities_1.txt
   assets-cg/mutations_table/abilities_2.txt
   assets-cg/mutations_table/abilities_3.txt

@@ -1,6 +1,9 @@
 #include <gint/std/stdlib.h>
 #include <math.h>
 
+#include <gint/display.h>
+#include <gint/keyboard.h>
+
 #include "epidemic_engine.h"
 
 
@@ -13,7 +16,7 @@ int grid_get(const struct grid epidemic_grid, const int i, const int j)
 
 bool can_become_infected(const struct grid epidemic_grid, const int mutations_selected[3], const int i, const int j)
 {
-    extern const uint8_t world[64][128];
+    extern const uint8_t world[184][396];
 
     // In case of water, low or high temperature
     if (world[j][i] == 0 && mutations_selected[2] != 3 && mutations_selected[2] != 4 && mutations_selected[2] != 6) return false;
@@ -33,7 +36,7 @@ bool bernoulli(const int p)
 
 void epidemic_simulation(struct game *current_game)
 {
-    extern const uint8_t world[64][128];
+    extern const uint8_t world[184][396];
 
     srand(current_game->total_time);
 
@@ -53,10 +56,9 @@ void epidemic_simulation(struct game *current_game)
             {
                 // Healthy
                 case 0:
-
                     // Become infected
                     if (can_become_infected(current_game->grid, current_game->mutations_selected, i, j) && bernoulli(current_game->contagion))
-                    {
+                    {                       
                         current_grid[i + j * current_game->grid.width] = 1;
                         if (world[j][i])
                         {

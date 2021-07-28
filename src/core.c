@@ -9,7 +9,7 @@
 #include "display_engine.h"
 
 
-int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
+int next_frame(struct game *current_game, int *vaccine)
 {
     for (int i = 0; current_game->planes[i]; i++)
     {
@@ -58,15 +58,13 @@ int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
     current_game->time += ENGINE_TICK;
     current_game->total_time += ENGINE_TICK;
 
-    if (!(current_game->time % 150)) *dna_animation = (*dna_animation + 1) % 16;
-
     if (current_game->time > limit_tick)
     {
         // Reset internal clock
         current_game->time = 0;
 
         // Display message on research
-        if (!current_game->research && current_game->priority) message("LA RECHERCHE CONTRE VOTRE VIRUS COMMENCE !"); 
+        if (!current_game->research && current_game->priority) message("LA RECHERCHE CONTRE VOTRE VIRUS        COMMENCE !"); 
         else if (!*vaccine && (current_game->research == current_game->limit)) {*vaccine = 1; message("LE VACCIN EST TERMINE."); }
 
         // Update the game
@@ -82,7 +80,7 @@ int next_frame(struct game *current_game, int *dna_animation, int *vaccine)
         if (!current_game->humans[1])
         {
             
-            if (current_game->humans[3] < 4 * (current_game->humans[0] + current_game->humans[2])) message("VOUS AVEZ PERDU.");
+            if (current_game->humans[3] < 4 * (current_game->humans[0] + current_game->humans[2])) message("VOUS AVEZ    PERDU.");
             else message("VOUS AVEZ GAGNE !");
             return 0;
         }
@@ -96,26 +94,20 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
     int key = rtc_key();
 
     if (key == KEY_ARROW) *boost = (*boost + 1) % 2;
-    if (key == KEY_OPTN && (background == 1 || background == 2)) return (background % 2) + 1;
     if (key == KEY_VARS)
     {
         *mutation_menu = 4;
-        return 3;
-    }
-    if (key == KEY_SQUARE)
-    {
-        if (background == 1 || background == 2) return 6;
-        else if (background == 6) return 1;
+        return 2;
     }
 
     if (key == KEY_ALPHA)
     {
-        if (background == 5) return 3;
+        if (background == 4) return 2;
         else return 1;
     }
-    if (key == KEY_EXIT && (background == 1 || background == 2)) return -1;
+    if (key == KEY_EXIT && background == 1) return -1;
 
-    if (background == 3)
+    if (background == 2)
     {
         switch (key)
         {
@@ -134,7 +126,7 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
             // Validation
             case KEY_SHIFT:
                 if (*mutation_menu == 4) return 1;
-                else return 5;
+                else return 4;
                 break;
         }
     }

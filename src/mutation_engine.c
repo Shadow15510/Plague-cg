@@ -79,7 +79,7 @@ void mutation_select(struct game *current_game, const int mutation_menu)
         if (key == KEY_ALPHA) end = 1;
         if (key == KEY_SHIFT && table[c.y][c.x] != 15 && table[c.y][c.x] != 0)
         {
-            end = mutation_buy(current_game, c, mutation_menu, table);
+            mutation_buy(current_game, c, mutation_menu, table);
         }
                     
         if (key == KEY_LEFT)  c.x = c.x - 1;
@@ -95,7 +95,7 @@ void mutation_select(struct game *current_game, const int mutation_menu)
 }
 
 
-int mutation_buy(struct game *current_game, const struct cursor c, const int mutation_menu, const int table[4][8])
+void mutation_buy(struct game *current_game, const struct cursor c, const int mutation_menu, const int table[4][8])
 {
     int button_selected = 1;
     int key = 0, id = table[c.y][c.x];
@@ -111,7 +111,7 @@ int mutation_buy(struct game *current_game, const struct cursor c, const int mut
         key = ev.key;
 
         if (key == KEY_DOWN || key == KEY_UP) button_selected = (button_selected + 1) % 2;
-        if (key == KEY_ALPHA) return 1;
+        if (key == KEY_ALPHA) break;
         if (key == KEY_OPTN)
         {
             display_mutation_description(mutation_data->name, mutation_data->description, mutation_menu, id);
@@ -119,7 +119,7 @@ int mutation_buy(struct game *current_game, const struct cursor c, const int mut
         }
         if (key == KEY_SHIFT)
         {
-            if (!button_selected) return 0;
+            if (!button_selected) break;
             else
             {
                 // if the player has'nt bought this mutation yet
@@ -138,9 +138,9 @@ int mutation_buy(struct game *current_game, const struct cursor c, const int mut
                         update_disease(current_game);
                         current_game->priority += ceil((mutation_data->severity + mutation_data->lethality) / 10);
                         current_game->limit += mutation_data->changement;
-                        message("MUTATION ACHETEE");
+                        message("MUTATION     ACHETEE");
                     }
-                    else message("ACHAT IMPOSSIBLE");
+                    else message("ACHAT        IMPOSSIBLE");
                 }
 
                 // if the player has already bought this mutation
@@ -148,14 +148,11 @@ int mutation_buy(struct game *current_game, const struct cursor c, const int mut
                 {
                     current_game->mutations_selected[mutation_menu - 1] = id;
                     update_disease(current_game);
-                    message("MUTATION SELECTIONNEE");
+                    message("MUTATION     SELECTIONNEE");
                 }
-                
             }
-            return 0;
         }
     }
-    return 0;
 }
 
 

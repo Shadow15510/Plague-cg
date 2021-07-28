@@ -31,7 +31,7 @@ void get_mutation(const struct game *current_game, const int mutation_menu, int 
 void mutation_select(struct game *current_game, const int mutation_menu);
 
 // mutation_buy : UI interface to buy mutations and see informations on them
-int mutation_buy(struct game *current_game, const struct cursor c, const int mutation_menu, const int table[4][8]);
+void mutation_buy(struct game *current_game, const struct cursor c, const int mutation_menu, const int table[4][8]);
 
 // update_disease : update the disease parameters
 void update_disease(struct game *current_game);

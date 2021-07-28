@@ -1,7 +1,7 @@
 /*
-  Project name ......: Plague
+  Project name ......: Plague CG
   Version ...........: 1.3.9
-  Last modification .: 8 June 2021
+  Last modification .: 5 July 2021
 
   code and assets provided with licence :
   GNU General Public Licence v3.0
@@ -32,18 +32,17 @@ int main_loop(struct game *current_game);
 
 int main(void)
 {
-
     extern font_t font_plague;
     dfont(&font_plague);
 
     title_screen();
 
     // Game statistics
-    struct plane plane_1 = {22, 20, 2, 84, 20, 22, 20, 0};
-    struct plane plane_2 = {34, 20, 3, 34, 44, 34, 20, 0};
-    struct plane plane_3 = {68, 44, 1, 68, 20, 68, 44, 0};
-    struct plane plane_4 = {104, 20, 3, 104, 50, 104, 20, 0};
-    struct plane plane_5 = {68, 44, 4, 34, 44, 68, 44, 0};
+    struct plane plane_1 = {81, 49, 2, 308, 49, 81, 49, 0};
+    struct plane plane_2 = {115, 49, 3, 115, 119, 115, 49, 0};
+    struct plane plane_3 = {224, 119, 1, 224, 49, 224, 119, 0};
+    struct plane plane_4 = {224, 141, 2, 337, 141, 224, 141, 0};
+    struct plane plane_5 = {224, 119, 4, 115, 119, 224, 119, 0};
 
 
     struct game current_game =
@@ -67,13 +66,14 @@ int main(void)
 
         .planes = {&plane_1, &plane_2, &plane_3, &plane_4, &plane_5, NULL},
 
-        .grid = {64, 128, NULL},
+        .grid = {184, 396, NULL},
     };
 
     // Allocate memory
     current_game.grid.data = calloc(current_game.grid.width * current_game.grid.height, sizeof(uint8_t));
+    for (int i = 0; i < current_game.grid.width * current_game.grid.height; i ++) current_game.grid.data[i] = 0;
 
-    current_game.grid.data[95 + 20 * current_game.grid.width] = 1;
+    current_game.grid.data[290 + 50 * current_game.grid.width] = 1;
     current_game.humans[0] = (current_game.grid.width * current_game.grid.height) - 1 - BLANK_CASES;
 
     gint_world_switch(GINT_CALL(read_save, (void *)&current_game));
@@ -84,12 +84,6 @@ int main(void)
     else
     {
         // Display stats at the end of the game
-        dclear(C_WHITE);
-        display_background(6);
-        display_foreground(6, &current_game, 0, 0);
-        dupdate();
-        sleep_ms(250);
-
         int opt = GETKEY_DEFAULT & ~GETKEY_MOD_SHIFT & ~GETKEY_MOD_ALPHA & ~GETKEY_REP_ARROWS;
         getkey_opt(opt, NULL);
 
@@ -106,35 +100,13 @@ int main(void)
 static void title_screen(void)
 {
     extern bopti_image_t img_title;
-    extern bopti_image_t img_explosion;
 
     dclear(C_BLACK);
 
-    dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-    dprint_opt(32, 29, C_WHITE, C_BLACK, 0, 0, "VERSION %s", VERSION, -1);
+    dimage(0, 0, &img_title);
+    dprint_opt(5, 200, C_WHITE, C_NONE, 0, 0, "VERSION %s", VERSION, -1);
+
     dupdate();
-    sleep_ms(1000);
-    
-
-    for (int frame = 0; frame < 5; frame ++)
-    {
-        dsubimage(0, 0, &img_title, 0, 0, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dsubimage(76, 9, &img_explosion, 41 * frame, 0, 40, 40, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(100);
-    }
-
-    sleep_ms(200);
-    for (int times = 0; times < 5; times ++)
-    {
-        dsubimage(0, 0, &img_title, 0, DHEIGHT, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(200);
-        dsubimage(0, 0, &img_title, 0, DHEIGHT*2, DWIDTH, DHEIGHT, DIMAGE_NONE);
-        dupdate();
-        sleep_ms(200);
-    }
-
     getkey();
 }
 
@@ -142,7 +114,7 @@ static void title_screen(void)
 int main_loop(struct game *current_game)
 {
     int background = 1, mutation_menu = 4;
-    int end = 0, to_save = 1, dna_animation = 0, vaccine = 0;
+    int end = 0, to_save = 1, vaccine = 0;
 
     static volatile int tick = 1;
     int t = timer_configure(TIMER_ANY, ENGINE_TICK*1000, GINT_CALL(callback_tick, &tick));
@@ -157,11 +129,11 @@ int main_loop(struct game *current_game)
         // Update the screen
         dclear(C_WHITE);
         display_background(background);
-        display_foreground(background, current_game, mutation_menu, dna_animation);
+        display_foreground(background, current_game, mutation_menu);
         dupdate();
 
         // Compute the motion of planes, DNA points and infectious model
-        to_save = next_frame(current_game, &dna_animation, &vaccine);
+        to_save = next_frame(current_game, &vaccine);
         if (!to_save) return 0;
         
         // Get inputs from the keyboard and manage it
@@ -169,10 +141,10 @@ int main_loop(struct game *current_game)
 
         // Special actions : quit and manage mutations
         if (background == -1) end = 1;
-        if (background == 5)
+        if (background == 4)
         {
             mutation_select(current_game, mutation_menu);
-            background = 3;
+            background = 2;
         }
     }
 
