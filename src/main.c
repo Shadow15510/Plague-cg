@@ -81,11 +81,11 @@ int main(void)
     if (current_game.total_time == 0)
     {
         dclear(C_WHITE);
-        
+
         dtext(1, 1, C_BLACK, "CONTROLES :");
         dtext(1, 18, C_BLACK, "[FLECHES] : SELECTIONNER");
         dtext(1, 35, C_BLACK, "[SHIFT] : VALIDER");
-        dtext(1, 52, C_BLACK, "[ALPHA]/[EXIT] : REVENIR EN ARRIERE");
+        dtext(1, 52, C_BLACK, "[ALPHA]/[EXIT] : REVENIR");
         dtext(1, 69, C_BLACK, "[VARS] : MENU DES MUTATIONS");
         dtext(1, 86, C_BLACK, "[->] : MODE RAPIDE");
         
