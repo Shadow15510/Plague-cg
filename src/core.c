@@ -100,12 +100,12 @@ int get_inputs(const int background, int *mutation_menu, int *boost)
         return 2;
     }
 
-    if (key == KEY_ALPHA)
+    if (key == KEY_ALPHA || key == KEY_EXIT)
     {
         if (background == 4) return 2;
+        if (background == 1) return -1;
         else return 1;
     }
-    if (key == KEY_EXIT && background == 1) return -1;
 
     if (background == 2)
     {
@@ -141,7 +141,7 @@ int rtc_key(void)
     int timeout = 1;
         
     key_event_t ev = getkey_opt(opt, &timeout);
-    if(ev.type == KEYEV_NONE) return 0;
+    if (ev.type == KEYEV_NONE) return 0;
         
     return ev.key;
 }
@@ -160,5 +160,5 @@ void message(char *msg)
     key_event_t ev = {0};
 
     display_message(msg);
-    while (ev.key != KEY_ALPHA) ev = getkey_opt(opt, NULL);
+    while (ev.key != KEY_ALPHA && ev.key != KEY_EXIT) ev = getkey_opt(opt, NULL);
 }

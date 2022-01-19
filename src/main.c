@@ -20,7 +20,7 @@
 #include "mutation_engine.h"
 #include "save.h"
 
-const char *VERSION = "1.3.9";
+const char *VERSION = "1.3.10";
 
 // title_screen : display the title screen
 static void title_screen(void);

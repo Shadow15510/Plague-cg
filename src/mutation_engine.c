@@ -76,7 +76,7 @@ void mutation_select(struct game *current_game, const int mutation_menu)
         if (key) {tick = 1; c.display = 1;}
         
         // Manage input
-        if (key == KEY_ALPHA) end = 1;
+        if (key == KEY_ALPHA || key == KEY_EXIT) end = 1;
         if (key == KEY_SHIFT && table[c.y][c.x] != 15 && table[c.y][c.x] != 0)
         {
             mutation_buy(current_game, c, mutation_menu, table);
@@ -111,11 +111,11 @@ void mutation_buy(struct game *current_game, const struct cursor c, const int mu
         key = ev.key;
 
         if (key == KEY_DOWN || key == KEY_UP) button_selected = (button_selected + 1) % 2;
-        if (key == KEY_ALPHA) break;
+        if (key == KEY_ALPHA || key == KEY_EXIT) break;
         if (key == KEY_OPTN)
         {
             display_mutation_description(mutation_data->name, mutation_data->description, mutation_menu, id);
-            while (ev.key != KEY_ALPHA) ev = getkey_opt(opt, NULL);
+            while (ev.key != KEY_ALPHA && ev.key != KEY_EXIT) ev = getkey_opt(opt, NULL);
         }
         if (key == KEY_SHIFT)
         {
