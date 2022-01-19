@@ -78,6 +78,21 @@ int main(void)
 
     gint_world_switch(GINT_CALL(read_save, (void *)&current_game));
 
+    if (current_game.total_time == 0)
+    {
+        dclear(C_WHITE);
+        
+        dtext(1, 1, C_BLACK, "CONTROLES :");
+        dtext(1, 18, C_BLACK, "[FLECHES] : SELECTIONNER");
+        dtext(1, 35, C_BLACK, "[SHIFT] : VALIDER");
+        dtext(1, 52, C_BLACK, "[ALPHA]/[EXIT] : REVENIR EN ARRIERE");
+        dtext(1, 69, C_BLACK, "[VARS] : MENU DES MUTATIONS");
+        dtext(1, 86, C_BLACK, "[->] : MODE RAPIDE");
+        
+        dupdate();
+        getkey();
+    }
+
     int to_save = main_loop(&current_game);
 
     if (to_save) gint_world_switch(GINT_CALL(write_save, (void *)&current_game));

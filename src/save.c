@@ -49,7 +49,7 @@ void read_save(struct game *current_game)
             current_game->planes[i] = new_planes[i];
         }
 
-        // Loa
+        // Load
         for (int i = 0; i < NB_PLANES; i ++)
         {
             BFile_Read(fd, current_game->planes[i], sizeof(struct plane), -1);
