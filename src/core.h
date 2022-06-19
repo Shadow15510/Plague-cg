@@ -18,7 +18,7 @@
 
 struct grid
 {    
-    // 64, 128
+    // 184, 316
     int height, width;
 
     // Use grid.data[i + j * grid.width] instead of grid.data[i][j]
